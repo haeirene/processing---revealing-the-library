@@ -2,10 +2,10 @@ import org.openkinect.processing.*;
 import spout.*;
 
 /*
- * DESIGN
+ * DISPLAY DESIGN
 */
 
-Design design;
+Display design;
 color cWhite = color(255, 255, 255);
 color cBlack = color(54, 54, 54);
 
@@ -42,10 +42,10 @@ void setup(){
   size(1280, 800, P3D);
   
   /*
-   * DESIGN
+   * DISPLAY DESIGN
   */
   
-  design = new Design();
+  design = new Display();
   
   /*
    * HARDWARE
@@ -59,7 +59,7 @@ void setup(){
 
 void draw(){
   /*
-   * DESIGN
+   * DISPLAY DESIGN
   */
   
   background(cWhite);
@@ -102,10 +102,6 @@ void draw(){
   }
   
   finalImg.updatePixels();*/
-  
-  /*
-    * DISPLAY
-  */
   
   //At the end
   spout.sendTexture();

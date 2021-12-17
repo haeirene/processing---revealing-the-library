@@ -1,4 +1,4 @@
-class Design{
+class Display{
   color cWhite = color(255, 255, 255);
   color cBlack = color(54, 54, 54);
   
@@ -104,5 +104,9 @@ class Design{
     
     textFont(brandonGrotesqueRegular16);
     text("date of publication", secondColumnBx, 552);
+  }
+  
+  void showThirdColumn(){
+    // do something
   }
 }

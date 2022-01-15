@@ -9,6 +9,8 @@ class Display{
   PFont brandonGrotesqueRegular16;
   PFont brandonGrotesqueRegular18;
   
+  PImage placeholder;
+  
   void initialize(){
     brandonGrotesqueBold40 = createFont("Brandon_bld.otf", 40);
     brandonGrotesqueBold18 = createFont("Brandon_bld.otf", 18);
@@ -16,6 +18,8 @@ class Display{
     brandonGrotesqueRegular12 = createFont("Brandon_reg.otf", 12);
     brandonGrotesqueRegular16 = createFont("Brandon_reg.otf", 16);
     brandonGrotesqueRegular18 = createFont("Brandon_reg.otf", 18);
+    
+    //placeholder = loadImage("images/bookcase.png");
   }
   
   void show(){
@@ -104,9 +108,17 @@ class Display{
     
     textFont(brandonGrotesqueRegular16);
     text("date of publication", secondColumnBx, 552);
-  }
-  
-  void showThirdColumn(){
-    // do something
+    
+    noFill();
+    strokeWeight(0.5);
+    strokeCap(SQUARE);
+    stroke(cBlack);
+    rect(480, 684, 320, 36);
+    
+    /*
+     * THIRD COLUMN
+    */
+    
+    //image(placeholder, 881, 241, 320, 457);
   }
 }

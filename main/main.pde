@@ -8,6 +8,11 @@ import spout.*;
 Display design;
 color cWhite = color(255, 255, 255);
 color cBlack = color(54, 54, 54);
+Book[] filteredBooks = new Book[25];
+Book currentBook;
+
+JSONObject json;
+JSONArray jBooks;
 
 /*
  * HARDWARE
@@ -32,7 +37,8 @@ Spout spout;
 
 // Screen size
 int xFirstScreen = 0;
-int xSecondScreen = 1280;
+//int xSecondScreen = 1280;
+int xSecondScreen = 0;
 
 int screenWidth = 1280;
 int screenHeight = 800;
@@ -47,9 +53,56 @@ void setup(){
   
   design = new Display();
   
+  json = loadJSONObject("http://localhost:3000/books/sort/bookName");
+  jBooks = json.getJSONArray("listOfBooks");
+  
+  for (int i = 0; i < json.size(); i++) {
+    JSONObject tempBook = jBooks.getJSONObject(i);
+    
+    //First book to show
+    if(i == 0){
+        currentBook = new Book(
+          tempBook.getString("name"),
+          tempBook.getString("name"),
+          tempBook.getString("author"),
+          tempBook.getString("collaborators"),
+          tempBook.getString("editor"),
+          tempBook.getString("language"),
+          tempBook.getString("locationInLibrary"),
+          tempBook.getInt("date"),
+          //tempBook.getJSONObject("dimensions"),
+          //tempBook.getInt("numberOfPages"),
+          tempBook.getString("referenceNumber"),
+          tempBook.getString("description")
+          //tempBook.getJSONObject("images")
+          );
+    }
+    
+    filteredBooks[i] = new Book(
+      tempBook.getString("name"),
+      tempBook.getString("name"),
+      tempBook.getString("author"),
+      tempBook.getString("collaborators"),
+      tempBook.getString("editor"),
+      tempBook.getString("language"),
+      tempBook.getString("locationInLibrary"),
+      tempBook.getInt("date"),
+      //tempBook.getJSONObject("dimensions"),
+      //tempBook.getInt("numberOfPages"),
+      tempBook.getString("referenceNumber"),
+      tempBook.getString("description")
+      //tempBook.getJSONObject("images")
+    );
+    //tempBook.setString("name", jBooks[i]["name"]);
+  }
+  
+  println(json.size());
+  
   /*
    * HARDWARE
   */
+  //finalImg = createGraphics(1280, 800, JAVA2D);
+  
   //kinect = new Kinect (this);
   //kinect.initDepth();
   
@@ -64,8 +117,8 @@ void draw(){
   
   background(cWhite);
 
-  design.show();
-
+  //design.show();
+  currentBook.showBookDetails();
   
   /*
    * KINECT
@@ -101,7 +154,10 @@ void draw(){
     }
   }
   
-  finalImg.updatePixels();*/
+  finalImg.updatePixels();
+  
+  //fill(255, 0, 150);
+  //ellipse(rx, ry, 32, 32);*/
   
   //At the end
   spout.sendTexture();

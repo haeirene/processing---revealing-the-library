@@ -165,8 +165,9 @@ void draw(){
 }
 
 void mousePressed() {
-  println("klik");
-  
+  /*
+   * FILTER BY CATEGORIE
+  */
   if(design.isFilterArcheology) {
     println("klik archeology" + design.isFilterArcheology);
   }
@@ -190,5 +191,27 @@ void mousePressed() {
   }
   if(design.isFilterTypography) {
     println("klik typography" + design.isFilterTypography);
+  }
+  
+  /*
+   * FILTER BY CHARACTERISTIQUE
+  */
+  if(design.isFilterAlphabeticalByAuthor) {
+    println("klik typography" + design.isFilterAlphabeticalByAuthor);
+  }
+  if(design.isFilterAlphabeticalByBook) {
+    println("klik typography" + design.isFilterAlphabeticalByBook);
+  }
+  if(design.isFilterByColor) {
+    println("klik typography" + design.isFilterByColor);
+  }
+  if(design.isFilterByLanguage) {
+    println("klik typography" + design.isFilterByLanguage);
+  }
+  if(design.isFilterByLocationInLibrary) {
+    println("klik typography" + design.isFilterByLocationInLibrary);
+  }
+  if(design.isFilterByYearOfPublication) {
+    println("klik typography" + design.isFilterByYearOfPublication);
   }
 }

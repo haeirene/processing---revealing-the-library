@@ -11,6 +11,50 @@ class Display{
   
   PImage placeholder;
   
+  //Filters -- 8
+  int secondColumnAx = 481;
+  int secondColumnAwidth = secondColumnAx + 50;
+  
+  int filterArcheologyX = secondColumnAx;
+  int filterArcheologyY = 422;
+  int filterArcheologyWidth = secondColumnAwidth;
+  boolean isFilterArcheology = false;
+  
+  int filterCartographyX = secondColumnAx;
+  int filterCartographyY = 448;
+  int filterCartographyWidth = secondColumnAwidth;
+  boolean isFilterCartography = false;
+  
+  int filterExhibitionsX = secondColumnAx;
+  int filterExhibitionsY = 474;
+  int filterExhibitionsWidth = secondColumnAwidth;
+  boolean isFilterExhibitions = false;
+  
+  int filterGraphicDesignX = secondColumnAx;
+  int filterGraphicDesignY = 500;
+  int filterGraphicDesignWidth = secondColumnAwidth;
+  boolean isFilterGraphicDesign = false;
+  
+  int filterInfoDesignX = secondColumnAx;
+  int filterInfoDesignY = 526;
+  int filterInfoDesignWidth = secondColumnAwidth;
+  boolean isFilterInfoDesign = false;
+  
+  int filterPhotographyX = secondColumnAx;
+  int filterPhotographyY = 552;
+  int filterPhotographyWidth = secondColumnAwidth;
+  boolean isFilterPhotography = false;
+  
+  int filterReligionX = secondColumnAx;
+  int filterReligionY = 578;
+  int filterReligionWidth = secondColumnAwidth;
+  boolean isFilterReligion = false;
+  
+  int filterTypographyX = secondColumnAx;
+  int filterTypographyY = 604;
+  int filterTypographyWidth = secondColumnAwidth;
+  boolean isFilterTypography = false;
+  
   void initialize(){
     brandonGrotesqueBold40 = createFont("Brandon_bld.otf", 40);
     brandonGrotesqueBold18 = createFont("Brandon_bld.otf", 18);
@@ -54,34 +98,32 @@ class Display{
     /*
      * PART A
     */
-    int secondColumnAx = 481;
-    
     textFont(brandonGrotesqueBold18);
     text("By subject", secondColumnAx, 357);
     
     textFont(brandonGrotesqueRegular16);
-    text("archeology", secondColumnAx, 422);
+    text("archeology", filterArcheologyX, filterArcheologyY);
     
     textFont(brandonGrotesqueRegular16);
-    text("cartography", secondColumnAx, 448);
+    text("cartography", filterCartographyX, filterCartographyY);
     
     textFont(brandonGrotesqueRegular16);
-    text("exhibitions", secondColumnAx, 474);
+    text("exhibitions", filterExhibitionsX, filterExhibitionsY);
     
     textFont(brandonGrotesqueRegular16);
-    text("graphic design", secondColumnAx, 500);
+    text("graphic design", filterGraphicDesignX, filterGraphicDesignY);
     
     textFont(brandonGrotesqueRegular16);
-    text("info. design", secondColumnAx, 526);
+    text("info. design", filterInfoDesignX, filterInfoDesignY);
     
     textFont(brandonGrotesqueRegular16);
-    text("photography", secondColumnAx, 552);
+    text("photography", filterPhotographyX, filterPhotographyY);
     
     textFont(brandonGrotesqueRegular16);
-    text("religion", secondColumnAx, 578);
+    text("religion", filterReligionX, filterReligionY);
     
     textFont(brandonGrotesqueRegular16);
-    text("typography", secondColumnAx, 604);
+    text("typography", filterTypographyX, filterTypographyY);
     
     /*
      * PART B
@@ -120,5 +162,28 @@ class Display{
     */
     
     //image(placeholder, 881, 241, 320, 457);
+  }
+  
+  boolean overText(int textX1, int textY1, int textX2, int textY2){
+    if (mouseX >= textX1 &&
+        mouseX <= textX2 &&
+        mouseY >= textY1 &&
+        mouseY <= textY2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  void updateFilters(){
+    circle(filterArcheologyX, filterArcheologyY, 16);
+    isFilterArcheology = overText(filterArcheologyX, filterArcheologyY - 8, filterArcheologyWidth , filterArcheologyY + 8);
+    isFilterCartography = overText(filterCartographyX, filterCartographyY - 8, filterCartographyWidth, filterCartographyY + 8);
+    isFilterExhibitions = overText(filterExhibitionsX, filterExhibitionsY - 8, filterExhibitionsWidth, filterExhibitionsY + 8);
+    isFilterGraphicDesign = overText(filterArcheologyX, filterArcheologyY - 8, filterArcheologyWidth, filterArcheologyY + 8);
+    isFilterInfoDesign = overText(filterGraphicDesignX, filterGraphicDesignY, filterGraphicDesignWidth, filterGraphicDesignY + 8);
+    isFilterPhotography = overText(filterPhotographyX, filterPhotographyY, filterPhotographyWidth, filterPhotographyY + 8);
+    isFilterReligion = overText(filterReligionX, filterReligionY, filterReligionWidth, filterReligionY + 8);
+    isFilterTypography = overText(filterTypographyX, filterTypographyY, filterTypographyWidth, filterTypographyY + 8);
   }
 }

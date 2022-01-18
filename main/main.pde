@@ -53,7 +53,7 @@ void setup(){
   
   design = new Display();
   
-  json = loadJSONObject("http://localhost:3000/books/sort/bookName");
+  json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/bookName");
   jBooks = json.getJSONArray("listOfBooks");
   
   for (int i = 0; i < json.size(); i++) {
@@ -117,8 +117,9 @@ void draw(){
   
   background(cWhite);
 
-  //design.show();
-  currentBook.showBookDetails();
+  design.show();
+  design.updateFilters();
+  //currentBook.showBookDetails();
   
   /*
    * KINECT
@@ -161,4 +162,33 @@ void draw(){
   
   //At the end
   spout.sendTexture();
+}
+
+void mousePressed() {
+  println("klik");
+  
+  if(design.isFilterArcheology) {
+    println("klik archeology" + design.isFilterArcheology);
+  }
+  if(design.isFilterCartography) {
+    println("klik cartography" + design.isFilterCartography);
+  }
+  if(design.isFilterExhibitions) {
+    println("klik exhibitions" + design.isFilterExhibitions);
+  }
+  if(design.isFilterGraphicDesign) {
+    println("klik graphic design" + design.isFilterGraphicDesign);
+  }
+  if(design.isFilterInfoDesign) {
+    println("klik info design" + design.isFilterInfoDesign);
+  }
+  if(design.isFilterPhotography) {
+    println("klik photography" + design.isFilterPhotography);
+  }
+  if(design.isFilterReligion) {
+    println("klik religion" + design.isFilterReligion);
+  }
+  if(design.isFilterTypography) {
+    println("klik typography" + design.isFilterTypography);
+  }
 }

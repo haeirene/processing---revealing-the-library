@@ -5,6 +5,9 @@ import spout.*;
  * DISPLAY DESIGN
 */
 
+int startDrawingX = 878;
+int startDrawingY = 444;
+
 Display design;
 color cWhite = color(255, 255, 255);
 color cBlack = color(54, 54, 54);
@@ -70,7 +73,7 @@ void setup(){
           tempBook.getString("language"),
           tempBook.getString("location_in_library"),
           tempBook.getInt("date"),
-          //tempBook.getJSONObject("dimensions"),
+          tempBook.getJSONObject("dimensions"),
           tempBook.getInt("number_of_pages"),
           tempBook.getString("reference_number"),
           tempBook.getString("description")
@@ -87,15 +90,17 @@ void setup(){
       tempBook.getString("language"),
       tempBook.getString("location_in_library"),
       tempBook.getInt("date"),
-      //tempBook.getJSONObject("dimensions"),
+      tempBook.getJSONObject("dimensions"),
       tempBook.getInt("number_of_pages"),
       tempBook.getString("reference_number"),
       tempBook.getString("description")
       //tempBook.getJSONObject("images")
     );
+    
+    filteredBooks[i].calculatePosition(filteredBooks[i].dimensions.getInt("height"), filteredBooks[i].dimensions.getInt("width_spine")); 
     //tempBook.setString("name", jBooks[i]["name"]);
     
-    println(filteredBooks[i].name);
+    //println(filteredBooks[i].dimensions.getInt("width"));
   }
   
   /*
@@ -119,6 +124,11 @@ void draw(){
 
   design.show();
   design.updateFilters();
+  
+  for (int i = 0; i < filteredBooks.length; i++) {
+    filteredBooks[i].displayBook();
+  }
+  
   currentBook.showBookDetails();
   
   /*
@@ -213,5 +223,18 @@ void mousePressed() {
   }
   if(design.isFilterByYearOfPublication) {
     println("klik by year of publication" + design.isFilterByYearOfPublication);
+  }
+  
+  for(int i = 0; i < filteredBooks.length; i++){
+    if(filteredBooks[i].overBook()){
+      println("click book " + filteredBooks[i].name);
+      currentBook = filteredBooks[i];
+      
+      // Update information
+      fill(cWhite);
+      noStroke();
+      rect(1280, 0, 1280, 800);
+      currentBook.showBookDetails();
+    }
   }
 }

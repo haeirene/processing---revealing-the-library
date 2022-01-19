@@ -91,7 +91,7 @@ class Display{
   
   int filterByYearOfPublicationX = secondColumnBx;
   int filterByYearOfPublicationY = 494;
-    int filterByYearOfPublicationWidth = secondColumnBwidth;
+  int filterByYearOfPublicationWidth = secondColumnBwidth;
   boolean isFilterByYearOfPublication = false;
   
   // Second column part 2 -- end

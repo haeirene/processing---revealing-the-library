@@ -28,6 +28,9 @@ class Book{
   String description;
   JSONObject images = new JSONObject();
   
+  int positionX;
+  int positionY;
+  
   PImage coverImg;
   PGraphics coverGraphics;
   PImage btnLeft;
@@ -42,7 +45,7 @@ class Book{
       String tempLanguage,
       String tempLocationInLibrary,
       int tempDate,
-      //JSONObject tempDimensions,
+      JSONObject tempDimensions,
       int tempNumberOfPages,
       String tempReferenceNumber,
       String tempDescription){
@@ -55,7 +58,7 @@ class Book{
           language = tempLanguage;
           locationInLibrary = tempLocationInLibrary;
           date = tempDate;
-          //dimensions = tempDimensions;
+          dimensions = tempDimensions;
           numberOfPages = tempNumberOfPages;
           referenceNumber = tempReferenceNumber;
           description = tempDescription;
@@ -147,5 +150,37 @@ class Book{
     //navigation
     image(btnLeft, 1935, 588, 8, 16);
     image(btnRight, 2004, 588, 8, 16);
+  }
+  
+  void calculatePosition(int heightBook, int widthSpine){
+    positionX = startDrawingX;
+    positionY = startDrawingY - heightBook * 3;
+      
+    startDrawingX += (widthSpine * 3);
+        
+    if(startDrawingX >= 1199){
+      startDrawingX = 0;
+      startDrawingY = 603;
+    }
+  }
+  
+  void displayBook(){
+    noFill();
+    strokeWeight(1);
+    stroke(cBlack);
+        
+    //878x - 1199
+    rect(positionX, positionY, dimensions.getInt("width_spine") * 3, dimensions.getInt("height") * 3);
+  }
+  
+  boolean overBook(){
+    if ((mouseX >= positionX) &&
+        (mouseX <= (positionX + (dimensions.getInt("width_spine") * 3))) &&
+        mouseY >= positionY &&
+        (mouseY <= (positionY + (dimensions.getInt("height") * 3)))) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

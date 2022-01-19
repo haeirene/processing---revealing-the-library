@@ -37,15 +37,15 @@ Spout spout;
 
 // Screen size
 int xFirstScreen = 0;
-//int xSecondScreen = 1280;
-int xSecondScreen = 0;
+int xSecondScreen = 1280;
+//int xSecondScreen = 0;
 
 int screenWidth = 1280;
 int screenHeight = 800;
 
 void setup(){
   //1280 * 2 = 2560
-  size(1280, 800, P3D);
+  size(2560, 800, P3D);
   
   /*
    * DISPLAY DESIGN
@@ -68,11 +68,11 @@ void setup(){
           tempBook.getString("collaborators"),
           tempBook.getString("editor"),
           tempBook.getString("language"),
-          tempBook.getString("locationInLibrary"),
+          tempBook.getString("location_in_library"),
           tempBook.getInt("date"),
           //tempBook.getJSONObject("dimensions"),
-          //tempBook.getInt("numberOfPages"),
-          tempBook.getString("referenceNumber"),
+          tempBook.getInt("number_of_pages"),
+          tempBook.getString("reference_number"),
           tempBook.getString("description")
           //tempBook.getJSONObject("images")
           );
@@ -85,18 +85,18 @@ void setup(){
       tempBook.getString("collaborators"),
       tempBook.getString("editor"),
       tempBook.getString("language"),
-      tempBook.getString("locationInLibrary"),
+      tempBook.getString("location_in_library"),
       tempBook.getInt("date"),
       //tempBook.getJSONObject("dimensions"),
-      //tempBook.getInt("numberOfPages"),
-      tempBook.getString("referenceNumber"),
+      tempBook.getInt("number_of_pages"),
+      tempBook.getString("reference_number"),
       tempBook.getString("description")
       //tempBook.getJSONObject("images")
     );
     //tempBook.setString("name", jBooks[i]["name"]);
+    
+    println(filteredBooks[i].name);
   }
-  
-  println(json.size());
   
   /*
    * HARDWARE
@@ -119,7 +119,7 @@ void draw(){
 
   design.show();
   design.updateFilters();
-  //currentBook.showBookDetails();
+  currentBook.showBookDetails();
   
   /*
    * KINECT
@@ -197,21 +197,21 @@ void mousePressed() {
    * FILTER BY CHARACTERISTIQUE
   */
   if(design.isFilterAlphabeticalByAuthor) {
-    println("klik typography" + design.isFilterAlphabeticalByAuthor);
+    println("klik alphabetical by author" + design.isFilterAlphabeticalByAuthor);
   }
   if(design.isFilterAlphabeticalByBook) {
-    println("klik typography" + design.isFilterAlphabeticalByBook);
+    println("klik alphabetical by book" + design.isFilterAlphabeticalByBook);
   }
   if(design.isFilterByColor) {
-    println("klik typography" + design.isFilterByColor);
+    println("klik by color" + design.isFilterByColor);
   }
   if(design.isFilterByLanguage) {
-    println("klik typography" + design.isFilterByLanguage);
+    println("klik by language" + design.isFilterByLanguage);
   }
   if(design.isFilterByLocationInLibrary) {
-    println("klik typography" + design.isFilterByLocationInLibrary);
+    println("klik by location in library" + design.isFilterByLocationInLibrary);
   }
   if(design.isFilterByYearOfPublication) {
-    println("klik typography" + design.isFilterByYearOfPublication);
+    println("klik by year of publication" + design.isFilterByYearOfPublication);
   }
 }

@@ -39,7 +39,7 @@ class Book{
       String tempLocationInLibrary,
       int tempDate,
       //JSONObject tempDimensions,
-      //int tempNumberOfPages,
+      int tempNumberOfPages,
       String tempReferenceNumber,
       String tempDescription){
       //JSONObject tempImages)
@@ -52,7 +52,7 @@ class Book{
           locationInLibrary = tempLocationInLibrary;
           date = tempDate;
           //dimensions = tempDimensions;
-          //numberOfPages = tempNumberOfPages;
+          numberOfPages = tempNumberOfPages;
           referenceNumber = tempReferenceNumber;
           description = tempDescription;
           //images = tempImages;
@@ -109,10 +109,10 @@ class Book{
     text(language, xSecondScreen + xSecondColumn, 396);
     
     textFont(brandonGrotesqueReg14);
-    //text(date, xSecondScreen + xSecondColumn, 416);
+    text(date, xSecondScreen + xSecondColumn, 416);
     
     textFont(brandonGrotesqueReg14);
-    //text(referenceNumber, xSecondScreen + xSecondColumn, 436);
+    text(referenceNumber, xSecondScreen + xSecondColumn, 436);
     
     // Images
     //showBookImages();

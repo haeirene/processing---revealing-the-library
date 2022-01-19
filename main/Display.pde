@@ -2,10 +2,10 @@ class Display{
   color cWhite = color(255, 255, 255);
   color cBlack = color(54, 54, 54);
   
-  PFont brandonGrotesqueBold40;
-  PFont brandonGrotesqueBold18;
-  PFont brandonGrotesqueRegular10;
-  PFont brandonGrotesqueRegular12;
+  PFont brandonGrotesqueBlack40;
+  PFont brandonGrotesqueBlack24;
+  PFont brandonGrotesqueBold19;
+  PFont brandonGrotesqueRegular13;
   PFont brandonGrotesqueRegular16;
   PFont brandonGrotesqueRegular18;
   
@@ -16,92 +16,91 @@ class Display{
   */
   
   // Second column part 1 -- start
-  int secondColumnAx = 481;
+  int secondColumnAx = 480;
   int secondColumnAwidth = secondColumnAx + 50;
+  int secondColumnBx = 670;
+  int secondColumnBwidth = secondColumnBx + 50;
   
-  int filterArcheologyX = secondColumnAx;
-  int filterArcheologyY = 422;
+  int filterArcheologyX = secondColumnBx;
+  int filterArcheologyY = 364;
   int filterArcheologyWidth = secondColumnAwidth;
   boolean isFilterArcheology = false;
   
-  int filterCartographyX = secondColumnAx;
-  int filterCartographyY = 448;
+  int filterCartographyX = secondColumnBx;
+  int filterCartographyY = 390;
   int filterCartographyWidth = secondColumnAwidth;
   boolean isFilterCartography = false;
   
-  int filterExhibitionsX = secondColumnAx;
-  int filterExhibitionsY = 474;
+  int filterExhibitionsX = secondColumnBx;
+  int filterExhibitionsY = 416;
   int filterExhibitionsWidth = secondColumnAwidth;
   boolean isFilterExhibitions = false;
   
-  int filterGraphicDesignX = secondColumnAx;
-  int filterGraphicDesignY = 500;
+  int filterGraphicDesignX = secondColumnBx;
+  int filterGraphicDesignY = 442;
   int filterGraphicDesignWidth = secondColumnAwidth;
   boolean isFilterGraphicDesign = false;
   
-  int filterInfoDesignX = secondColumnAx;
-  int filterInfoDesignY = 526;
+  int filterInfoDesignX = secondColumnBx;
+  int filterInfoDesignY = 468;
   int filterInfoDesignWidth = secondColumnAwidth;
   boolean isFilterInfoDesign = false;
   
-  int filterPhotographyX = secondColumnAx;
-  int filterPhotographyY = 552;
+  int filterPhotographyX = secondColumnBx;
+  int filterPhotographyY = 494;
   int filterPhotographyWidth = secondColumnAwidth;
   boolean isFilterPhotography = false;
   
-  int filterReligionX = secondColumnAx;
-  int filterReligionY = 578;
+  int filterReligionX = secondColumnBx;
+  int filterReligionY = 520;
   int filterReligionWidth = secondColumnAwidth;
   boolean isFilterReligion = false;
   
-  int filterTypographyX = secondColumnAx;
-  int filterTypographyY = 604;
+  int filterTypographyX = secondColumnBx;
+  int filterTypographyY = 546;
   int filterTypographyWidth = secondColumnAwidth;
   boolean isFilterTypography = false;
   
   // Second column part 1 -- end
   // Second column part 2 -- start
   
-  int secondColumnBx = 661;
-  int secondColumnBwidth = secondColumnBx + 50;
-  
   int filterAlphabeticalByAuthorX = secondColumnBx;
-  int filterAlphabeticalByAuthorY = 422;
+  int filterAlphabeticalByAuthorY = 364;
   int filterAlphabeticalByAuthorWidth = secondColumnBwidth;
   boolean isFilterAlphabeticalByAuthor = false;
   
   int filterAlphabeticalByBookX = secondColumnBx;
-  int filterAlphabeticalByBookY = 448;
+  int filterAlphabeticalByBookY = 390;
   int filterAlphabeticalByBookWidth = secondColumnBwidth;
   boolean isFilterAlphabeticalByBook = false;
   
   int filterByColorX = secondColumnBx;
-  int filterByColorY = 474;
+  int filterByColorY = 416;
   int filterByColorWidth = secondColumnBwidth;
   boolean isFilterByColor = false;
   
   int filterByLanguageX = secondColumnBx;
-  int filterByLanguageY = 500;
+  int filterByLanguageY = 442;
   int filterByLanguageWidth = secondColumnBwidth;
   boolean isFilterByLanguage = false;
   
   int filterByLocationInLibraryX = secondColumnBx;
-  int filterByLocationInLibraryY = 526;
+  int filterByLocationInLibraryY = 468;
   int filterByLocationInLibraryWidth = secondColumnBwidth;
   boolean isFilterByLocationInLibrary = false;
   
   int filterByYearOfPublicationX = secondColumnBx;
-  int filterByYearOfPublicationY = 552;
+  int filterByYearOfPublicationY = 494;
     int filterByYearOfPublicationWidth = secondColumnBwidth;
   boolean isFilterByYearOfPublication = false;
   
   // Second column part 2 -- end
   
   void initialize(){
-    brandonGrotesqueBold40 = createFont("Brandon_bld.otf", 40);
-    brandonGrotesqueBold18 = createFont("Brandon_bld.otf", 18);
-    brandonGrotesqueRegular10 = createFont("Brandon_reg.otf", 10);
-    brandonGrotesqueRegular12 = createFont("Brandon_reg.otf", 12);
+    brandonGrotesqueBlack40 = createFont("Brandon_blk.otf", 40);
+    brandonGrotesqueBlack24 = createFont("Brandon_blk.otf", 24);
+    brandonGrotesqueBold19 = createFont("Brandon_bld.otf", 19);
+    brandonGrotesqueRegular13 = createFont("Brandon_reg.otf", 13);
     brandonGrotesqueRegular16 = createFont("Brandon_reg.otf", 16);
     brandonGrotesqueRegular18 = createFont("Brandon_reg.otf", 18);
     
@@ -119,29 +118,55 @@ class Display{
   */
   void showFirstColumn(){
     fill(cBlack);
-    textFont(brandonGrotesqueBold40);
-    text("VISUALIZING THE LIBRARY", 81, 214, 320, 97);
+    textFont(brandonGrotesqueBlack40);
+    text("VISUALIZING THE LIBRARY", 79, 108, 321, 104);
     
-    textFont(brandonGrotesqueRegular12);
-    text("A selection of 24 books was picked out of the collections ‘old Library’ and ‘special editions’. Both these collections contain vulnerable and valuable books: because of their uniqueness, age, physical fragility or even economical value.", 81, 345, 321, 360);
+    textFont(brandonGrotesqueRegular13);
+    text("A selection of 24 books was picked out of the collections ‘old Library’ and ‘special editions’. Both these collections contain vulnerable and valuable books: because of their uniqueness, age, physical fragility or even economical value.", 79, 234, 321, 379);
   }
   
   void showSecondColumn(){
     /*
      * GENERAL
     */
-    textFont(brandonGrotesqueBold18);
+    textFont(brandonGrotesqueBlack24);
     //text(string, x1, y1, x2, y2)
-    text("FILTER", 481, 224);
+    text("FILTER", 479, 165);
     
-    textFont(brandonGrotesqueRegular10);
-    text("Filter to see a specific part of the library or use the searchbar to look for a specific book.", 481, 288, 800, 321);
+    textFont(brandonGrotesqueRegular13);
+    text("Filter to see a specific part of the library or use the searchbar to look for a specific book.", 479, 233, 318, 37);
     
     /*
      * START PART A
     */
-    textFont(brandonGrotesqueBold18);
-    text("By subject", secondColumnAx, 357);
+  
+    textFont(brandonGrotesqueBold19);
+    text("By characteristic", secondColumnAx, 307);
+    
+    textFont(brandonGrotesqueRegular16);
+    text("alphabetical by author", secondColumnAx, filterAlphabeticalByAuthorY);
+    
+    textFont(brandonGrotesqueRegular16);
+    text("alphabetical by book", secondColumnAx, filterAlphabeticalByBookY);
+    
+    textFont(brandonGrotesqueRegular16);
+    text("color", secondColumnAx, filterByColorY);
+    
+    textFont(brandonGrotesqueRegular16);
+    text("language", secondColumnAx, filterByLanguageY);
+    
+    textFont(brandonGrotesqueRegular16);
+    text("location of publication", secondColumnAx, filterByLocationInLibraryY);
+    
+    textFont(brandonGrotesqueRegular16);
+    text("date of publication", secondColumnAx, filterByYearOfPublicationY);
+    
+    /*
+     * END OF PART A
+     * START PART B
+    */
+    textFont(brandonGrotesqueBold19);
+    text("By subject", secondColumnBx, 307);
     
     textFont(brandonGrotesqueRegular16);
     text("archeology", filterArcheologyX, filterArcheologyY);
@@ -167,36 +192,6 @@ class Display{
     textFont(brandonGrotesqueRegular16);
     text("typography", filterTypographyX, filterTypographyY);
     
-    /*
-     * END OF PART A
-     * START PART B
-    */
-  
-    textFont(brandonGrotesqueBold18);
-    text("By characteristic", secondColumnBx, 357);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("alphabetical by author", secondColumnBx, filterAlphabeticalByAuthorY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("alphabetical by book", secondColumnBx, filterAlphabeticalByBookY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("color", secondColumnBx, filterByColorY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("language", secondColumnBx, filterByLanguageY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("location of publication", secondColumnBx, filterByLocationInLibraryY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("date of publication", secondColumnBx, filterByYearOfPublicationY);
-    
-    /*
-     * END OF PART B
-    */
-    
     noFill();
     strokeWeight(0.5);
     strokeCap(SQUARE);
@@ -207,7 +202,12 @@ class Display{
      * THIRD COLUMN
     */
     
-    //image(placeholder, 881, 241, 320, 457);
+    fill(cBlack);
+    noStroke();
+    strokeCap(SQUARE);
+    rect(878, 284, 323, 10);
+    rect(878, 444, 323, 10);
+    rect(878, 603, 323, 10);
   }
   
   boolean overText(int textX1, int textY1, int textX2, int textY2){

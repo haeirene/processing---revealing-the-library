@@ -56,7 +56,7 @@ void setup(){
   json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/bookName");
   jBooks = json.getJSONArray("listOfBooks");
   
-  for (int i = 0; i < json.size(); i++) {
+  for (int i = 0; i < jBooks.size(); i++) {
     JSONObject tempBook = jBooks.getJSONObject(i);
     
     //First book to show

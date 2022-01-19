@@ -6,16 +6,22 @@ class Display{
   PFont brandonGrotesqueBold18;
   PFont brandonGrotesqueRegular10;
   PFont brandonGrotesqueRegular12;
+  PFont brandonGrotesqueRegular13;
   PFont brandonGrotesqueRegular16;
   PFont brandonGrotesqueRegular18;
+  
+  PImage placeholder;
   
   void initialize(){
     brandonGrotesqueBold40 = createFont("Brandon_bld.otf", 40);
     brandonGrotesqueBold18 = createFont("Brandon_bld.otf", 18);
     brandonGrotesqueRegular10 = createFont("Brandon_reg.otf", 10);
     brandonGrotesqueRegular12 = createFont("Brandon_reg.otf", 12);
-    brandonGrotesqueRegular16 = createFont("Brandon_reg.otf", 16);
+    brandonGrotesqueRegular13 = createFont("Brandon_reg.otf", 13);
+    brandonGrotesqueRegular16 = createFont("Brandon_reg.otf", 15);
     brandonGrotesqueRegular18 = createFont("Brandon_reg.otf", 18);
+    
+    placeholder = loadImage("images/bookcase.png");
   }
   
   void show(){
@@ -32,7 +38,7 @@ class Display{
     textFont(brandonGrotesqueBold40);
     text("VISUALIZING THE LIBRARY", 81, 214, 320, 97);
     
-    textFont(brandonGrotesqueRegular12);
+    textFont(brandonGrotesqueRegular13);
     text("A selection of 24 books was picked out of the collections ‘old Library’ and ‘special editions’. Both these collections contain vulnerable and valuable books: because of their uniqueness, age, physical fragility or even economical value.", 81, 345, 321, 360);
   }
   
@@ -44,8 +50,9 @@ class Display{
     //text(string, x1, y1, x2, y2)
     text("FILTER", 481, 224);
     
-    textFont(brandonGrotesqueRegular10);
-    text("Filter to see a specific part of the library or use the searchbar to look for a specific book.", 481, 288, 800, 321);
+    // TODO: groter maken, redelijk onleesbaar
+    textFont(brandonGrotesqueRegular13);
+    text("Filter to see a specific part of the library or use the searchbar to look for a specific book.", 481, 288, 800, 361);
     
     /*
      * PART A
@@ -104,9 +111,17 @@ class Display{
     
     textFont(brandonGrotesqueRegular16);
     text("date of publication", secondColumnBx, 552);
-  }
-  
-  void showThirdColumn(){
-    // do something
+    
+    noFill();
+    strokeWeight(0.5);
+    strokeCap(SQUARE);
+    stroke(cBlack);
+    rect(480, 684, 320, 36);
+    
+    /*
+     * THIRD COLUMN
+    */
+    
+    image(placeholder, 881, 241, 320, 457);
   }
 }

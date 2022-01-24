@@ -1,5 +1,6 @@
-import org.openkinect.processing.*;
 import spout.*;
+import oscP5.*; // Library of Andreas Schleger
+import netP5.*; // Already included in Processing
 
 /*
  * DISPLAY DESIGN
@@ -21,19 +22,12 @@ JSONArray jBooks;
  * HARDWARE
 */
 
-// Kinect
-Kinect kinect;
+// Kinect Azure
+OscP5 oscP5;
+NetAddress myRemoteLocation;
 
-int depthValueKinect = 2048;
-int rx;
-int ry;
-int skip = 1;
-
-float minThresh = 240;
-float maxThresh = 469;
-
-PImage img;
-PGraphics finalImg;
+int handPositionX;
+int handPositionY;
 
 // Spout
 Spout spout;
@@ -56,7 +50,7 @@ void setup(){
   
   design = new Display();
   
-  json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books");
+  json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/bookName");
   jBooks = json.getJSONArray("listOfBooks");
   
   for (int i = 0; i < jBooks.size(); i++) {
@@ -76,8 +70,9 @@ void setup(){
           tempBook.getJSONObject("dimensions"),
           tempBook.getInt("number_of_pages"),
           tempBook.getString("reference_number"),
-          tempBook.getString("description"),
-          tempBook.getJSONObject("images"));
+          tempBook.getString("description")
+          //tempBook.getJSONObject("images")
+          );
     }
     
     filteredBooks[i] = new Book(
@@ -92,8 +87,8 @@ void setup(){
       tempBook.getJSONObject("dimensions"),
       tempBook.getInt("number_of_pages"),
       tempBook.getString("reference_number"),
-      tempBook.getString("description"),
-      tempBook.getJSONObject("images")
+      tempBook.getString("description")
+      //tempBook.getJSONObject("images")
     );
     
     filteredBooks[i].calculatePosition(filteredBooks[i].dimensions.getInt("height"), filteredBooks[i].dimensions.getInt("width_spine")); 
@@ -105,10 +100,16 @@ void setup(){
   /*
    * HARDWARE
   */
-  //finalImg = createGraphics(1280, 800, JAVA2D);
+  oscP5 = new OscP5(this, 10000);
   
-  //kinect = new Kinect (this);
-  //kinect.initDepth();
+  /* myRemoteLocation is a NetAddress. a NetAddress takes 2 parameters,
+   * an ip address and a port number. myRemoteLocation is used as parameter in
+   * oscP5.send() when sending osc packets to another computer, device, 
+   * application. usage see below. for testing purposes the listening port
+   * and the port of the remote location address are the same, hence you will
+   * send messages back to this sketch.
+   */
+  myRemoteLocation = new NetAddress("127.0.0.1", 10000);
   
   spout = new Spout(this);
   spout.createSender("main");
@@ -129,45 +130,6 @@ void draw(){
   }
   
   currentBook.showBookDetails();
-  
-  /*
-   * KINECT
-  */
-  
-  // Get the raw depth as array of integers
-  /*int[] depth = kinect.getRawDepth();
-  
-  finalImg.beginDraw();
-  finalImg.loadPixels();
-  
-  //int record = 2048;
-  int record = finalImg.height;
-  rx = 0;
-  ry = 0;
-    
-  for (int x = 0; x < finalImg.width; x += skip) {
-    for (int y = 0; y < finalImg.height; y += skip) {
-      int ty = int(map(y, 0, finalImg.height, 0, kinect.height));
-      int tx = int(map(x, 0, finalImg.width, 0, kinect.width));
-      int offset = ty * kinect.width + tx;
-      float d = depth[offset];
-      
-      // Debug visualisation
-      if (d > minThresh && d < maxThresh && x > 75) {
-        if(y < record){
-          record = y;
-          rx = width - x;
-          //rx = x;
-          ry = y;
-        }
-      }
-    }
-  }
-  
-  finalImg.updatePixels();
-  
-  //fill(255, 0, 150);
-  //ellipse(rx, ry, 32, 32);*/
   
   //At the end
   spout.sendTexture();
@@ -202,16 +164,28 @@ void mousePressed() {
     println("klik typography" + design.isFilterTypography);
   }
   
-  currentBook.updateBookImages(currentBook.overLeft(), currentBook.overRight());
-  
   /*
    * FILTER BY CHARACTERISTIQUE
   */
-  //design.displayFiltersByCharacteristique();
+  if(design.isFilterAlphabeticalByAuthor) {
+    println("klik alphabetical by author" + design.isFilterAlphabeticalByAuthor);
+  }
+  if(design.isFilterAlphabeticalByBook) {
+    println("klik alphabetical by book" + design.isFilterAlphabeticalByBook);
+  }
+  if(design.isFilterByColor) {
+    println("klik by color" + design.isFilterByColor);
+  }
+  if(design.isFilterByLanguage) {
+    println("klik by language" + design.isFilterByLanguage);
+  }
+  if(design.isFilterByLocationInLibrary) {
+    println("klik by location in library" + design.isFilterByLocationInLibrary);
+  }
+  if(design.isFilterByYearOfPublication) {
+    println("klik by year of publication" + design.isFilterByYearOfPublication);
+  }
   
-  /*
-   * BOOKCASE
-  */
   for(int i = 0; i < filteredBooks.length; i++){
     if(filteredBooks[i].overBook()){
       println("click book " + filteredBooks[i].name);
@@ -226,34 +200,15 @@ void mousePressed() {
   }
 }
 
-void updateFilteredBooks(){
-  JSONArray tempJBooks = json.getJSONArray("listOfBooks");
-  startDrawingX = 878;
-  startDrawingY = 444;
+void oscEvent(OscMessage theOscMessage){
+  /* print the address pattern and the typetag of the received OscMessage */
+  print("### received an osc message.");
+  print(" addrpattern: " + theOscMessage.addrPattern());
+  println(" typetag: " + theOscMessage.typetag());
+  println(theOscMessage.get(0).floatValue());
   
-  for (int i = 0; i < tempJBooks.size(); i++) {
-    JSONObject tempBook = tempJBooks.getJSONObject(i);
-    
-    filteredBooks[i] = new Book(
-      tempBook.getString("name"),
-      tempBook.getString("name"),
-      tempBook.getString("author"),
-      tempBook.getString("collaborators"),
-      tempBook.getString("editor"),
-      tempBook.getString("language"),
-      tempBook.getString("location_in_library"),
-      tempBook.getInt("date"),
-      tempBook.getJSONObject("dimensions"),
-      tempBook.getInt("number_of_pages"),
-      tempBook.getString("reference_number"),
-      tempBook.getString("description"),
-      tempBook.getJSONObject("images")
-    );
-    
-    filteredBooks[i].calculatePosition(filteredBooks[i].dimensions.getInt("height"), filteredBooks[i].dimensions.getInt("width_spine")); 
-  }
   
-  for (int i = 0; i < filteredBooks.length; i++) {
-    filteredBooks[i].displayBook();
-  }
+  
+  int handPositionX;
+  int handPositionY;
 }

@@ -70,8 +70,8 @@ void setup(){
           tempBook.getJSONObject("dimensions"),
           tempBook.getInt("number_of_pages"),
           tempBook.getString("reference_number"),
-          tempBook.getString("description")
-          //tempBook.getJSONObject("images")
+          tempBook.getString("description"),
+          tempBook.getJSONObject("images")
           );
     }
     
@@ -87,8 +87,8 @@ void setup(){
       tempBook.getJSONObject("dimensions"),
       tempBook.getInt("number_of_pages"),
       tempBook.getString("reference_number"),
-      tempBook.getString("description")
-      //tempBook.getJSONObject("images")
+      tempBook.getString("description"),
+      tempBook.getJSONObject("images")
     );
     
     filteredBooks[i].calculatePosition(filteredBooks[i].dimensions.getInt("height"), filteredBooks[i].dimensions.getInt("width_spine")); 
@@ -136,6 +136,7 @@ void draw(){
 }
 
 void mousePressed() {
+  boolean isCharacteristique = false;
   /*
    * FILTER BY CATEGORIE
   */
@@ -168,23 +169,46 @@ void mousePressed() {
    * FILTER BY CHARACTERISTIQUE
   */
   if(design.isFilterAlphabeticalByAuthor) {
+    isCharacteristique = true;
     println("klik alphabetical by author" + design.isFilterAlphabeticalByAuthor);
+    json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books");
   }
+
   if(design.isFilterAlphabeticalByBook) {
+    isCharacteristique = true;
     println("klik alphabetical by book" + design.isFilterAlphabeticalByBook);
+    json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/bookName");
   }
+  
   if(design.isFilterByColor) {
+    isCharacteristique = true;
     println("klik by color" + design.isFilterByColor);
+    json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books");
   }
+  
   if(design.isFilterByLanguage) {
+    isCharacteristique = true;
     println("klik by language" + design.isFilterByLanguage);
+    json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/language");
   }
+  
   if(design.isFilterByLocationInLibrary) {
+    isCharacteristique = true;
     println("klik by location in library" + design.isFilterByLocationInLibrary);
+    json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/locationInLibrary");
   }
+  
   if(design.isFilterByYearOfPublication) {
+    isCharacteristique = true;
     println("klik by year of publication" + design.isFilterByYearOfPublication);
+    json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/dateOfPublication");
   }
+  
+  // Don't call this unnecessary, as this is intensive.
+  if(isCharacteristique){
+    updateFilteredBooks();
+  }
+
   
   for(int i = 0; i < filteredBooks.length; i++){
     if(filteredBooks[i].overBook()){
@@ -198,6 +222,14 @@ void mousePressed() {
       currentBook.showBookDetails();
     }
   }
+  
+  if(currentBook.overLeft()){
+    currentBook.updateBookImages(currentBook.overLeft(), currentBook.overRight());
+  }
+  
+  if(currentBook.overRight()){
+    currentBook.updateBookImages(currentBook.overLeft(), currentBook.overRight());
+  }
 }
 
 void oscEvent(OscMessage theOscMessage){
@@ -207,8 +239,55 @@ void oscEvent(OscMessage theOscMessage){
   println(" typetag: " + theOscMessage.typetag());
   println(theOscMessage.get(0).floatValue());
   
-  
-  
   int handPositionX;
   int handPositionY;
+}
+
+void updateFilteredBooks(){
+  println("api magic");
+  jBooks = json.getJSONArray("listOfBooks");
+  
+  startDrawingX = 878;
+  startDrawingY = 444;
+  
+  for (int i = 0; i < jBooks.size(); i++) {
+    JSONObject tempBook = jBooks.getJSONObject(i);
+    
+    //First book to show
+    if(i == 0){
+        currentBook = new Book(
+          tempBook.getString("name"),
+          tempBook.getString("name"),
+          tempBook.getString("author"),
+          tempBook.getString("collaborators"),
+          tempBook.getString("editor"),
+          tempBook.getString("language"),
+          tempBook.getString("location_in_library"),
+          tempBook.getInt("date"),
+          tempBook.getJSONObject("dimensions"),
+          tempBook.getInt("number_of_pages"),
+          tempBook.getString("reference_number"),
+          tempBook.getString("description"),
+          tempBook.getJSONObject("images")
+          );
+    }
+    
+    filteredBooks[i] = new Book(
+      tempBook.getString("name"),
+      tempBook.getString("name"),
+      tempBook.getString("author"),
+      tempBook.getString("collaborators"),
+      tempBook.getString("editor"),
+      tempBook.getString("language"),
+      tempBook.getString("location_in_library"),
+      tempBook.getInt("date"),
+      tempBook.getJSONObject("dimensions"),
+      tempBook.getInt("number_of_pages"),
+      tempBook.getString("reference_number"),
+      tempBook.getString("description"),
+      tempBook.getJSONObject("images")
+    );
+    
+  filteredBooks[i].calculatePosition(filteredBooks[i].dimensions.getInt("height"), filteredBooks[i].dimensions.getInt("width_spine"));
+  }
 }

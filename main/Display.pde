@@ -5,6 +5,7 @@ class Display{
   PFont brandonGrotesqueBlack40;
   PFont brandonGrotesqueBlack24;
   PFont brandonGrotesqueBold19;
+  PFont brandonGrotesqueBold16;
   PFont brandonGrotesqueRegular13;
   PFont brandonGrotesqueRegular16;
   PFont brandonGrotesqueRegular18;
@@ -100,6 +101,7 @@ class Display{
     brandonGrotesqueBlack40 = createFont("Brandon_blk.otf", 40);
     brandonGrotesqueBlack24 = createFont("Brandon_blk.otf", 24);
     brandonGrotesqueBold19 = createFont("Brandon_bld.otf", 19);
+    brandonGrotesqueBold16 = createFont("Brandon_bld.otf", 16);
     brandonGrotesqueRegular13 = createFont("Brandon_reg.otf", 13);
     brandonGrotesqueRegular16 = createFont("Brandon_reg.otf", 16);
     brandonGrotesqueRegular18 = createFont("Brandon_reg.otf", 18);
@@ -143,23 +145,7 @@ class Display{
     textFont(brandonGrotesqueBold19);
     text("By characteristic", secondColumnAx, 307);
     
-    textFont(brandonGrotesqueRegular16);
-    text("alphabetical by author", secondColumnAx, filterAlphabeticalByAuthorY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("alphabetical by book", secondColumnAx, filterAlphabeticalByBookY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("color", secondColumnAx, filterByColorY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("language", secondColumnAx, filterByLanguageY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("location of publication", secondColumnAx, filterByLocationInLibraryY);
-    
-    textFont(brandonGrotesqueRegular16);
-    text("date of publication", secondColumnAx, filterByYearOfPublicationY);
+    displayFiltersByCharacteristique();
     
     /*
      * END OF PART A
@@ -237,11 +223,128 @@ class Display{
     /*
      * FILTER BY CHARACTERISTIQUE
     */
-    isFilterAlphabeticalByAuthor = overText(filterAlphabeticalByAuthorX , filterAlphabeticalByAuthorY - 8, filterAlphabeticalByAuthorWidth , filterAlphabeticalByAuthorY + 8);
-    isFilterAlphabeticalByBook = overText(filterAlphabeticalByBookX , filterAlphabeticalByBookY - 8, filterAlphabeticalByBookWidth , filterAlphabeticalByBookY + 8);
-    isFilterByColor = overText(filterByColorX , filterByColorY - 8, filterByColorWidth , filterByColorY + 8);
-    isFilterByLanguage = overText(filterByLanguageX , filterByLanguageY - 8, filterByLanguageWidth , filterByLanguageY + 8);
-    isFilterByLocationInLibrary = overText(filterByLocationInLibraryX , filterByLocationInLibraryY - 8, filterByLocationInLibraryWidth , filterByLocationInLibraryY + 8);
-    isFilterByYearOfPublication = overText(filterByYearOfPublicationX , filterByYearOfPublicationY - 8, filterByYearOfPublicationWidth , filterByYearOfPublicationY + 8);
+    isFilterAlphabeticalByAuthor = overText(secondColumnAx , filterAlphabeticalByAuthorY - 8, filterAlphabeticalByAuthorWidth, filterAlphabeticalByAuthorY + 8);
+    isFilterAlphabeticalByBook = overText(secondColumnAx, filterAlphabeticalByBookY - 8, filterAlphabeticalByBookWidth, filterAlphabeticalByBookY + 8);
+    isFilterByColor = overText(secondColumnAx , filterByColorY - 8, filterByColorWidth , filterByColorY + 8);
+    isFilterByLanguage = overText(secondColumnAx , filterByLanguageY - 8, filterByLanguageWidth , filterByLanguageY + 8);
+    isFilterByLocationInLibrary = overText(secondColumnAx , filterByLocationInLibraryY - 8, filterByLocationInLibraryWidth, filterByLocationInLibraryY + 8);
+    isFilterByYearOfPublication = overText(secondColumnAx , filterByYearOfPublicationY - 8, filterByYearOfPublicationWidth, filterByYearOfPublicationY + 8);
+  }
+  
+  void displayFiltersByCharacteristique(){
+    if(isFilterAlphabeticalByAuthor) {
+      println("alphabetical by author");
+      
+      clearFilter(secondColumnAx, filterAlphabeticalByAuthorY);
+      fill(cBlack);
+      textFont(brandonGrotesqueBold16);
+      text("alphabetical by author", secondColumnAx, filterAlphabeticalByAuthorY);
+      
+      json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books");
+    }
+    else{
+      clearFilter(secondColumnAx, filterAlphabeticalByAuthorY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("alphabetical by author", secondColumnAx, filterAlphabeticalByAuthorY);
+    }
+    
+    if(isFilterAlphabeticalByBook) {
+      println("alphabetical by book");
+      
+      clearFilter(secondColumnAx, filterAlphabeticalByBookY);
+      fill(cBlack);
+      textFont(brandonGrotesqueBold16);
+      text("alphabetical by book", secondColumnAx, filterAlphabeticalByBookY);
+      
+      json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/bookName");
+    }
+    else{
+      clearFilter(secondColumnAx, filterAlphabeticalByBookY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("alphabetical by book", secondColumnAx, filterAlphabeticalByBookY);
+    }
+    
+    if(isFilterByColor) {
+      println("by color");
+      
+      clearFilter(secondColumnAx, filterByColorY);
+      fill(cBlack);
+      textFont(brandonGrotesqueBold16);
+      text("color", secondColumnAx, filterByColorY);
+      
+      json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books");
+    }
+    else{
+      clearFilter(secondColumnAx, filterByColorY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("color", secondColumnAx, filterByColorY);
+    }
+    
+    if(isFilterByLanguage){
+      println("by language");
+      
+      clearFilter(secondColumnAx, filterByLanguageY);
+      fill(cBlack);
+      textFont(brandonGrotesqueBold16);
+      text("language", secondColumnAx, filterByLanguageY);
+      
+      json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/language");
+    }
+    else{
+      clearFilter(secondColumnAx, filterByLanguageY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("language", secondColumnAx, filterByLanguageY);
+    }
+    
+    if(isFilterByLocationInLibrary){
+      println("by location in library");
+      
+      clearFilter(secondColumnAx, filterByLocationInLibraryY);
+      fill(cBlack);
+      textFont(brandonGrotesqueBold16);
+      text("location of publication", secondColumnAx, filterByLocationInLibraryY);
+      
+      json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/locationInLibrary");
+    }
+    else{
+      clearFilter(secondColumnAx, filterByLocationInLibraryY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("location of publication", secondColumnAx, filterByLocationInLibraryY);
+    }
+    
+    if(isFilterByYearOfPublication){
+      println("by year of publication");
+      
+      clearFilter(secondColumnAx, filterByYearOfPublicationY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("year of publication", secondColumnAx, filterByYearOfPublicationY);
+      
+      json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/dateOfPublication");
+    }
+    else{
+      clearFilter(secondColumnAx, filterByYearOfPublicationY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("year of publication", secondColumnAx, filterByYearOfPublicationY);
+    }
+    
+    if(!isFilterAlphabeticalByAuthor && !isFilterAlphabeticalByBook && !isFilterByColor && !isFilterByLanguage && !isFilterByLocationInLibrary && !isFilterByYearOfPublication){
+      println("no filter");
+      json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books");
+    }
+    
+    updateFilteredBooks();
+  }
+  
+  void clearFilter(int tempX, int tempY){
+    fill(cWhite);
+    noStroke();
+    rect(tempX, tempY, 50, 16);
   }
 }

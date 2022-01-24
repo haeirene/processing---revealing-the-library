@@ -28,11 +28,23 @@ class Book{
   String description;
   JSONObject images = new JSONObject();
   
+  int currentIndexImages = 0;
   int positionX;
   int positionY;
   
   PImage coverImg;
-  PGraphics coverGraphics;
+  PImage backImg;
+  PImage d0Img;
+  PImage d1Img;
+  PImage d2Img;
+  PImage d3Img;
+  PImage d4Img;
+  PImage d5Img;
+  PImage d6Img;
+  PImage d7Img;
+  PImage d8Img;
+  PImage d9Img;
+  
   PImage btnLeft;
   PImage btnRight;
   
@@ -48,8 +60,8 @@ class Book{
       JSONObject tempDimensions,
       int tempNumberOfPages,
       String tempReferenceNumber,
-      String tempDescription){
-      //JSONObject tempImages)
+      String tempDescription,
+      JSONObject tempImages){
           name = tempName;
           subName = tempSubName;
           author = tempAuthor;
@@ -62,9 +74,26 @@ class Book{
           numberOfPages = tempNumberOfPages;
           referenceNumber = tempReferenceNumber;
           description = tempDescription;
-          //images = tempImages;
+          images = tempImages;
       
       //coverGraphics = createGraphics();
+      if(images.getString("cover").length() != 0){
+        coverImg = loadImage("images/" + images.getString("cover"));
+        backImg = loadImage("images/" + images.getString("backcover"));
+        
+        String[] detailed = images.getJSONArray("detailed").getStringArray();
+        d0Img = loadImage("images/" + detailed[0]);
+        d1Img = loadImage("images/" + detailed[1]);
+        d2Img = loadImage("images/" + detailed[2]);
+        d3Img = loadImage("images/" + detailed[3]);
+        d4Img = loadImage("images/" + detailed[4]);
+        d5Img = loadImage("images/" + detailed[5]);
+        d6Img = loadImage("images/" + detailed[6]);
+        d7Img = loadImage("images/" + detailed[7]);
+        d8Img = loadImage("images/" + detailed[8]);
+        d9Img = loadImage("images/" + detailed[9]);
+      }
+      
       btnLeft = loadImage("images/btn_left.png");
       btnRight = loadImage("images/btn_right.png");
     
@@ -131,12 +160,17 @@ class Book{
   
   // Placeholder
   void showBookImages(){
-    //image(placeholder, xSecondScreen + 619, 80, 581, 529);
     fill(cBlack);
     noStroke();
     
     //main image
-    rect(1933, 80, 452, 452);
+    if(images.getString("cover").length() != 0){
+      image(coverImg, xSecondScreen + 653, 80, 452, 452);
+    }
+    else{
+      rect(1933, 80, 452, 452);
+    }
+    //image(placeholder, xSecondScreen + 619, 80, 452, 452);
     
     //next images
     int smallRectSize = 70;
@@ -182,5 +216,84 @@ class Book{
     } else {
       return false;
     }
+  }
+  
+  boolean overLeft(){
+    if (mouseX >= 1935 &&
+        mouseX <= 1935 + 8 &&
+        mouseY >= 588 &&
+        mouseY <= 588 + 16) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  boolean overRight(){
+    if (mouseX >= 2004 &&
+        mouseX <= 2004 + 8 &&
+        mouseY >= 588 &&
+        mouseY <= 588 + 16) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  
+  void updateBookImages(boolean isLeft, boolean isRight){
+    PImage tempImg;
+    
+    if(isLeft){
+      currentIndexImages--;
+    }
+    if(isRight){
+      currentIndexImages++;
+    }
+    if(currentIndexImages < 0 || currentIndexImages > 11){
+      currentIndexImages = 0;
+    }
+    
+    switch(currentIndexImages){
+      case 0:
+        tempImg = coverImg;
+        break;
+      case 1:
+        tempImg = backImg;
+        break;
+      case 2:
+        tempImg = d0Img;
+        break;
+      case 3:
+        tempImg = d1Img;
+        break;
+      case 4:
+        tempImg = d2Img;
+        break;
+      case 5:
+        tempImg = d3Img;
+        break;
+      case 6:
+        tempImg = d4Img;
+        break;
+      case 7:
+        tempImg = d5Img;
+        break;
+      case 8:
+        tempImg = d6Img;
+        break;
+      case 9:
+        tempImg = d7Img;
+        break;
+      case 10:
+        tempImg = d8Img;
+        break;
+      case 11:
+        tempImg = d9Img;
+        break;
+      default:
+        tempImg = coverImg;
+    }
+    
+    image(tempImg, xSecondScreen + 653, 80, 452, 452);
   }
 }

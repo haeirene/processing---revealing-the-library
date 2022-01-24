@@ -56,7 +56,7 @@ void setup(){
   
   design = new Display();
   
-  json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books/sort/bookName");
+  json = loadJSONObject("https://hi---revealing-the-library.herokuapp.com/books");
   jBooks = json.getJSONArray("listOfBooks");
   
   for (int i = 0; i < jBooks.size(); i++) {
@@ -76,9 +76,8 @@ void setup(){
           tempBook.getJSONObject("dimensions"),
           tempBook.getInt("number_of_pages"),
           tempBook.getString("reference_number"),
-          tempBook.getString("description")
-          //tempBook.getJSONObject("images")
-          );
+          tempBook.getString("description"),
+          tempBook.getJSONObject("images"));
     }
     
     filteredBooks[i] = new Book(
@@ -93,8 +92,8 @@ void setup(){
       tempBook.getJSONObject("dimensions"),
       tempBook.getInt("number_of_pages"),
       tempBook.getString("reference_number"),
-      tempBook.getString("description")
-      //tempBook.getJSONObject("images")
+      tempBook.getString("description"),
+      tempBook.getJSONObject("images")
     );
     
     filteredBooks[i].calculatePosition(filteredBooks[i].dimensions.getInt("height"), filteredBooks[i].dimensions.getInt("width_spine")); 
@@ -203,28 +202,16 @@ void mousePressed() {
     println("klik typography" + design.isFilterTypography);
   }
   
+  currentBook.updateBookImages(currentBook.overLeft(), currentBook.overRight());
+  
   /*
    * FILTER BY CHARACTERISTIQUE
   */
-  if(design.isFilterAlphabeticalByAuthor) {
-    println("klik alphabetical by author" + design.isFilterAlphabeticalByAuthor);
-  }
-  if(design.isFilterAlphabeticalByBook) {
-    println("klik alphabetical by book" + design.isFilterAlphabeticalByBook);
-  }
-  if(design.isFilterByColor) {
-    println("klik by color" + design.isFilterByColor);
-  }
-  if(design.isFilterByLanguage) {
-    println("klik by language" + design.isFilterByLanguage);
-  }
-  if(design.isFilterByLocationInLibrary) {
-    println("klik by location in library" + design.isFilterByLocationInLibrary);
-  }
-  if(design.isFilterByYearOfPublication) {
-    println("klik by year of publication" + design.isFilterByYearOfPublication);
-  }
+  //design.displayFiltersByCharacteristique();
   
+  /*
+   * BOOKCASE
+  */
   for(int i = 0; i < filteredBooks.length; i++){
     if(filteredBooks[i].overBook()){
       println("click book " + filteredBooks[i].name);
@@ -236,5 +223,37 @@ void mousePressed() {
       rect(1280, 0, 1280, 800);
       currentBook.showBookDetails();
     }
+  }
+}
+
+void updateFilteredBooks(){
+  JSONArray tempJBooks = json.getJSONArray("listOfBooks");
+  startDrawingX = 878;
+  startDrawingY = 444;
+  
+  for (int i = 0; i < tempJBooks.size(); i++) {
+    JSONObject tempBook = tempJBooks.getJSONObject(i);
+    
+    filteredBooks[i] = new Book(
+      tempBook.getString("name"),
+      tempBook.getString("name"),
+      tempBook.getString("author"),
+      tempBook.getString("collaborators"),
+      tempBook.getString("editor"),
+      tempBook.getString("language"),
+      tempBook.getString("location_in_library"),
+      tempBook.getInt("date"),
+      tempBook.getJSONObject("dimensions"),
+      tempBook.getInt("number_of_pages"),
+      tempBook.getString("reference_number"),
+      tempBook.getString("description"),
+      tempBook.getJSONObject("images")
+    );
+    
+    filteredBooks[i].calculatePosition(filteredBooks[i].dimensions.getInt("height"), filteredBooks[i].dimensions.getInt("width_spine")); 
+  }
+  
+  for (int i = 0; i < filteredBooks.length; i++) {
+    filteredBooks[i].displayBook();
   }
 }

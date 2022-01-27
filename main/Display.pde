@@ -10,7 +10,7 @@ class Display{
   PFont brandonGrotesqueRegular16;
   PFont brandonGrotesqueRegular18;
   
-  PImage placeholder;
+  PImage btnSearch;
   
   /*
    * FILTERS
@@ -117,6 +117,8 @@ class Display{
     brandonGrotesqueRegular18 = createFont("Brandon_reg.otf", 18);
     
     //placeholder = loadImage("images/bookcase.png");
+    
+    btnSearch = loadImage("images/btn_search.png");
   }
   
   void show(){
@@ -188,11 +190,17 @@ class Display{
     textFont(brandonGrotesqueRegular16);
     text("typography", filterTypographyX, filterTypographyY);
     
+    // SEARCH BAR
     noFill();
     strokeWeight(0.5);
     strokeCap(SQUARE);
     stroke(cBlack);
-    rect(480, 684, 320, 36);
+    rect(480, 603, 322, 36);
+    
+    image(btnSearch, 762, 609, 24, 24);
+    
+    fill(cBlack, 200);
+    text("Use the keyboard to search.", 488, 615, 322, 36);
     
     /*
      * THIRD COLUMN

@@ -80,18 +80,28 @@ class Display{
   int filterByColorWidth = secondColumnBwidth;
   boolean isFilterByColor = false;
   
+  int filterByHeightX = secondColumnBx;
+  int filterByHeightY = 442;
+  int filterByHeightWidth = secondColumnBwidth;
+  boolean isFilterByHeight = false;
+  
   int filterByLanguageX = secondColumnBx;
-  int filterByLanguageY = 442;
+  int filterByLanguageY = 468;
   int filterByLanguageWidth = secondColumnBwidth;
   boolean isFilterByLanguage = false;
   
   int filterByLocationInLibraryX = secondColumnBx;
-  int filterByLocationInLibraryY = 468;
+  int filterByLocationInLibraryY = 494;
   int filterByLocationInLibraryWidth = secondColumnBwidth;
   boolean isFilterByLocationInLibrary = false;
   
+  int filterByWidthX = secondColumnBx;
+  int filterByWidthY = 520;
+  int filterByWidthWidth = secondColumnBwidth;
+  boolean isFilterByWidth = false;
+  
   int filterByYearOfPublicationX = secondColumnBx;
-  int filterByYearOfPublicationY = 494;
+  int filterByYearOfPublicationY = 546;
   int filterByYearOfPublicationWidth = secondColumnBwidth;
   boolean isFilterByYearOfPublication = false;
   
@@ -226,8 +236,10 @@ class Display{
     isFilterAlphabeticalByAuthor = overText(secondColumnAx , filterAlphabeticalByAuthorY - 8, filterAlphabeticalByAuthorWidth, filterAlphabeticalByAuthorY + 8);
     isFilterAlphabeticalByBook = overText(secondColumnAx, filterAlphabeticalByBookY - 8, filterAlphabeticalByBookWidth, filterAlphabeticalByBookY + 8);
     isFilterByColor = overText(secondColumnAx , filterByColorY - 8, filterByColorWidth , filterByColorY + 8);
+    isFilterByHeight = overText(secondColumnAx , filterByHeightY - 8, filterByHeightWidth , filterByHeightY + 8);
     isFilterByLanguage = overText(secondColumnAx , filterByLanguageY - 8, filterByLanguageWidth , filterByLanguageY + 8);
     isFilterByLocationInLibrary = overText(secondColumnAx , filterByLocationInLibraryY - 8, filterByLocationInLibraryWidth, filterByLocationInLibraryY + 8);
+    isFilterByWidth = overText(secondColumnAx , filterByWidthY - 8, filterByWidthWidth, filterByWidthY + 8);
     isFilterByYearOfPublication = overText(secondColumnAx , filterByYearOfPublicationY - 8, filterByYearOfPublicationWidth, filterByYearOfPublicationY + 8);
   }
   
@@ -271,6 +283,19 @@ class Display{
       text("color", secondColumnAx, filterByColorY);
     }
     
+    if(isFilterByHeight) {
+      clearFilter(secondColumnAx, filterByHeightY);
+      fill(cBlack);
+      textFont(brandonGrotesqueBold16);
+      text("height", secondColumnAx, filterByHeightY);
+    }
+    else{
+      clearFilter(secondColumnAx, filterByHeightY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("height", secondColumnAx, filterByHeightY);
+    }
+    
     if(isFilterByLanguage){
       clearFilter(secondColumnAx, filterByLanguageY);
       fill(cBlack);
@@ -297,6 +322,19 @@ class Display{
       text("location of publication", secondColumnAx, filterByLocationInLibraryY);
     }
     
+    if(isFilterByWidth) {
+      clearFilter(secondColumnAx, filterByWidthY);
+      fill(cBlack);
+      textFont(brandonGrotesqueBold16);
+      text("width", secondColumnAx, filterByWidthY);
+    }
+    else{
+      clearFilter(secondColumnAx, filterByWidthY);
+      fill(cBlack);
+      textFont(brandonGrotesqueRegular16);
+      text("width", secondColumnAx, filterByWidthY);
+    }
+    
     if(isFilterByYearOfPublication){
       clearFilter(secondColumnAx, filterByYearOfPublicationY);
       fill(cBlack);
@@ -309,8 +347,6 @@ class Display{
       textFont(brandonGrotesqueRegular16);
       text("year of publication", secondColumnAx, filterByYearOfPublicationY);
     }
-    
-    //updateFilteredBooks();
   }
   
   void clearFilter(int tempX, int tempY){

@@ -400,12 +400,5 @@ class Book{
     thirdSquareImg = tempThirdSquareImg;
     fourthSquareImg = tempFourthSquareImg;
     fifthSquareImg = tempFifthSquareImg;
-    
-    //image(tempMainImg, xSecondScreen + 653, 80, 452, 452);
-    //image(tempFirstSquareImg, smallRectX, 80, smallRectSize, smallRectSize);
-    //image(tempSecondSquareImg, smallRectX, 176, smallRectSize, smallRectSize);
-    //image(tempThirdSquareImg, smallRectX, 271, smallRectSize, smallRectSize);
-    //image(tempFourthSquareImg, smallRectX, 367, smallRectSize, smallRectSize);
-    //image(tempFifthSquareImg, smallRectX, 462, smallRectSize, smallRectSize);
   }
 }

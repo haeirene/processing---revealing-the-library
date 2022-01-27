@@ -31,6 +31,15 @@ class Book{
   int currentIndexImages = 0;
   int positionX;
   int positionY;
+  int smallRectSize = 70;
+  int smallRectX = 2410;
+  
+  PImage mainImg;
+  PImage firstSquareImg;
+  PImage secondSquareImg;
+  PImage thirdSquareImg;
+  PImage fourthSquareImg;
+  PImage fifthSquareImg;
   
   PImage coverImg;
   PImage backImg;
@@ -92,6 +101,14 @@ class Book{
         d7Img = loadImage("images/" + detailed[7]);
         d8Img = loadImage("images/" + detailed[8]);
         d9Img = loadImage("images/" + detailed[9]);
+        
+        //Other squares
+        mainImg = coverImg;
+        firstSquareImg = backImg;
+        secondSquareImg = d0Img;
+        thirdSquareImg = d1Img;
+        fourthSquareImg = d2Img;
+        fifthSquareImg = d3Img;
       }
       
       btnLeft = loadImage("images/btn_left.png");
@@ -165,21 +182,23 @@ class Book{
     
     //main image
     if(images.getString("cover").length() != 0){
-      image(coverImg, xSecondScreen + 653, 80, 452, 452);
+      image(mainImg, xSecondScreen + 653, 80, 452, 452);
+      
+      //Navigation
+      image(firstSquareImg, smallRectX, 80, smallRectSize, smallRectSize);
+      image(secondSquareImg, smallRectX, 176, smallRectSize, smallRectSize);
+      image(thirdSquareImg, smallRectX, 271, smallRectSize, smallRectSize);
+      image(fourthSquareImg, smallRectX, 367, smallRectSize, smallRectSize);
+      image(fifthSquareImg, smallRectX, 462, smallRectSize, smallRectSize);
     }
     else{
       rect(1933, 80, 452, 452);
+      rect(smallRectX, 80, smallRectSize, smallRectSize);
+      rect(smallRectX, 176, smallRectSize, smallRectSize);
+      rect(smallRectX, 271, smallRectSize, smallRectSize);
+      rect(smallRectX, 367, smallRectSize, smallRectSize);
+      rect(smallRectX, 462, smallRectSize, smallRectSize);
     }
-    //image(placeholder, xSecondScreen + 619, 80, 452, 452);
-    
-    //next images
-    int smallRectSize = 70;
-    int smallRectX = 2410;
-    rect(smallRectX, 80, smallRectSize, smallRectSize);
-    rect(smallRectX, 176, smallRectSize, smallRectSize);
-    rect(smallRectX, 271, smallRectSize, smallRectSize);
-    rect(smallRectX, 367, smallRectSize, smallRectSize);
-    rect(smallRectX, 462, smallRectSize, smallRectSize);
     
     //navigation
     image(btnLeft, 1935, 588, 8, 16);
@@ -241,7 +260,12 @@ class Book{
   }
   
   void updateBookImages(boolean isLeft, boolean isRight){
-    PImage tempImg;
+    PImage tempMainImg;
+    PImage tempFirstSquareImg;
+    PImage tempSecondSquareImg;
+    PImage tempThirdSquareImg;
+    PImage tempFourthSquareImg;
+    PImage tempFifthSquareImg;
     
     if(isLeft){
       currentIndexImages--;
@@ -249,51 +273,134 @@ class Book{
     if(isRight){
       currentIndexImages++;
     }
-    if(currentIndexImages < 0 || currentIndexImages > 11){
+    
+    if(currentIndexImages < 0){
+      currentIndexImages = 11;
+    }
+    if(currentIndexImages > 11){
       currentIndexImages = 0;
     }
     
+    println(currentIndexImages);
+    
     switch(currentIndexImages){
       case 0:
-        tempImg = coverImg;
+        tempMainImg = coverImg;
+        tempFirstSquareImg = backImg;
+        tempSecondSquareImg = d0Img;
+        tempThirdSquareImg = d1Img;
+        tempFourthSquareImg = d2Img;
+        tempFifthSquareImg = d3Img;
         break;
       case 1:
-        tempImg = backImg;
+        tempMainImg = backImg;
+        tempFirstSquareImg = d0Img;
+        tempSecondSquareImg = d1Img;
+        tempThirdSquareImg = d2Img;
+        tempFourthSquareImg = d3Img;
+        tempFifthSquareImg = d4Img;
         break;
       case 2:
-        tempImg = d0Img;
+        tempMainImg = d0Img;
+        tempFirstSquareImg = d1Img;
+        tempSecondSquareImg = d2Img;
+        tempThirdSquareImg = d3Img;
+        tempFourthSquareImg = d4Img;
+        tempFifthSquareImg = d5Img;
         break;
       case 3:
-        tempImg = d1Img;
+        tempMainImg = d1Img;
+        tempFirstSquareImg = d2Img;
+        tempSecondSquareImg = d3Img;
+        tempThirdSquareImg = d4Img;
+        tempFourthSquareImg = d5Img;
+        tempFifthSquareImg = d6Img;
         break;
       case 4:
-        tempImg = d2Img;
+        tempMainImg = d2Img;
+        tempFirstSquareImg = d3Img;
+        tempSecondSquareImg = d4Img;
+        tempThirdSquareImg = d5Img;
+        tempFourthSquareImg = d6Img;
+        tempFifthSquareImg = d7Img;
         break;
       case 5:
-        tempImg = d3Img;
+        tempMainImg = d3Img;
+        tempFirstSquareImg = d4Img;
+        tempSecondSquareImg = d5Img;
+        tempThirdSquareImg = d6Img;
+        tempFourthSquareImg = d7Img;
+        tempFifthSquareImg = d8Img;
         break;
       case 6:
-        tempImg = d4Img;
+        tempMainImg = d4Img;
+        tempFirstSquareImg = d5Img;
+        tempSecondSquareImg = d6Img;
+        tempThirdSquareImg = d7Img;
+        tempFourthSquareImg = d8Img;
+        tempFifthSquareImg = d9Img;
         break;
       case 7:
-        tempImg = d5Img;
+        tempMainImg = d5Img;
+        tempFirstSquareImg = d6Img;
+        tempSecondSquareImg = d7Img;
+        tempThirdSquareImg = d8Img;
+        tempFourthSquareImg = d9Img;
+        tempFifthSquareImg = coverImg;
         break;
       case 8:
-        tempImg = d6Img;
+        tempMainImg = d6Img;
+        tempFirstSquareImg = d7Img;
+        tempSecondSquareImg = d8Img;
+        tempThirdSquareImg = d9Img;
+        tempFourthSquareImg = coverImg;
+        tempFifthSquareImg = backImg;
         break;
       case 9:
-        tempImg = d7Img;
+        tempMainImg = d7Img;
+        tempFirstSquareImg = d8Img;
+        tempSecondSquareImg = d9Img;
+        tempThirdSquareImg = coverImg;
+        tempFourthSquareImg = backImg;
+        tempFifthSquareImg = d0Img;
         break;
       case 10:
-        tempImg = d8Img;
+        tempMainImg = d8Img;
+        tempFirstSquareImg = d9Img;
+        tempSecondSquareImg = coverImg;
+        tempThirdSquareImg = backImg;
+        tempFourthSquareImg = d0Img;
+        tempFifthSquareImg = d1Img;
         break;
       case 11:
-        tempImg = d9Img;
+        tempMainImg = d9Img;
+        tempFirstSquareImg = coverImg;
+        tempSecondSquareImg = backImg;
+        tempThirdSquareImg = d0Img;
+        tempFourthSquareImg = d1Img;
+        tempFifthSquareImg = d2Img;
         break;
       default:
-        tempImg = coverImg;
+        tempMainImg = coverImg;
+        tempFirstSquareImg = backImg;
+        tempSecondSquareImg = d0Img;
+        tempThirdSquareImg = d1Img;
+        tempFourthSquareImg = d2Img;
+        tempFifthSquareImg = d3Img;
     }
     
-    image(tempImg, xSecondScreen + 653, 80, 452, 452);
+    mainImg = tempMainImg;
+    firstSquareImg = tempFirstSquareImg;
+    secondSquareImg = tempSecondSquareImg;
+    thirdSquareImg = tempThirdSquareImg;
+    fourthSquareImg = tempFourthSquareImg;
+    fifthSquareImg = tempFifthSquareImg;
+    
+    //image(tempMainImg, xSecondScreen + 653, 80, 452, 452);
+    //image(tempFirstSquareImg, smallRectX, 80, smallRectSize, smallRectSize);
+    //image(tempSecondSquareImg, smallRectX, 176, smallRectSize, smallRectSize);
+    //image(tempThirdSquareImg, smallRectX, 271, smallRectSize, smallRectSize);
+    //image(tempFourthSquareImg, smallRectX, 367, smallRectSize, smallRectSize);
+    //image(tempFifthSquareImg, smallRectX, 462, smallRectSize, smallRectSize);
   }
 }

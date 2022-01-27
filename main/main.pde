@@ -60,7 +60,7 @@ void setup(){
     if(i == 0){
         currentBook = new Book(
           tempBook.getString("name"),
-          tempBook.getString("name"),
+          tempBook.getString("subtitle"),
           tempBook.getString("author"),
           tempBook.getString("collaborators"),
           tempBook.getString("editor"),
@@ -78,7 +78,7 @@ void setup(){
     
     filteredBooks[i] = new Book(
       tempBook.getString("name"),
-      tempBook.getString("name"),
+      tempBook.getString("subtitle"),
       tempBook.getString("author"),
       tempBook.getString("collaborators"),
       tempBook.getString("editor"),
@@ -269,7 +269,7 @@ void updateFilteredBooks(){
     
     filteredBooks[i] = new Book(
       tempBook.getString("name"),
-      tempBook.getString("name"),
+      tempBook.getString("subtitle"),
       tempBook.getString("author"),
       tempBook.getString("collaborators"),
       tempBook.getString("editor"),

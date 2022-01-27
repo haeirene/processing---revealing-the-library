@@ -131,52 +131,86 @@ class Book{
   void showBookDetails(){
     fill(cBlack);
     
-    textFont(brandonGrotesqueBlack24);
-    text(name, xSecondScreen + 258, 223, 274, 70);
+    //Check the amount of letters
+    int amountOfLettersInName = 0;
+    for(int i = 0; i < name.length(); i++) {
+       if (Character.isLetter(name.charAt(i)))
+       amountOfLettersInName++;
+    }
     
-    textFont(brandonGrotesqueBold19);
-    text(subName, xSecondScreen + 258, 293, 274, 42);
+    int amountOfLettersInSubName = 0;
+    for(int i = 0; i < subName.length(); i++) {
+       if (Character.isLetter(subName.charAt(i)))
+       amountOfLettersInSubName++;
+    }
+    
+    if(amountOfLettersInName >= 54 && amountOfLettersInSubName >= 105){
+      textFont(brandonGrotesqueBlack24);
+      text(name, xSecondScreen + 271, 84, 274, 102);
+      
+      textFont(brandonGrotesqueBold19);
+      text(subName, xSecondScreen + 271, 191, 274, 131);
+    }
+    else if(amountOfLettersInName >= 54){
+      textFont(brandonGrotesqueBlack24);
+      text(name, xSecondScreen + 271, 135, 274, 102);
+      
+      textFont(brandonGrotesqueBold19);
+      text(subName, xSecondScreen + 271, 237, 274, 112);
+    }
+    else if(amountOfLettersInSubName >= 105){
+      textFont(brandonGrotesqueBlack24);
+      text(name, xSecondScreen + 271, 135, 274, 70);
+      
+      textFont(brandonGrotesqueBold19);
+      text(subName, xSecondScreen + 271, 237, 274, 112);
+    }
+    else{
+      textFont(brandonGrotesqueBlack24);
+      text(name, xSecondScreen + 271, 167, 274, 70);
+      
+      textFont(brandonGrotesqueBold19);
+      text(subName, xSecondScreen + 271, 237, 274, 94);
+    }
     
     textFont(brandonGrotesqueReg13);
-    text(description, xSecondScreen + 258, 583, 274, 111);
+    text(description, xSecondScreen + 271, 583, 274, 111);
     
     // First column
-    int xFirstColumn = 218;
     textAlign(RIGHT);
     
     textFont(brandonGrotesqueReg16);
-    text("Author:", xSecondScreen + xFirstColumn, 356);
+    text("Author:", 1525, 356);
     
     textFont(brandonGrotesqueReg16);
-    text("Editor:", xSecondScreen + xFirstColumn, 376);
+    text("Editor:", 1525, 376);
     
     textFont(brandonGrotesqueReg16);
-    text("Language:", xSecondScreen + xFirstColumn, 396);
+    text("Language:", 1525, 396);
     
     textFont(brandonGrotesqueReg16);
-    text("Publication year:", xSecondScreen + xFirstColumn, 416);
+    text("Publication year:", 1525, 416);
     
     textFont(brandonGrotesqueReg16);
-    text("Reference number:", xSecondScreen + xFirstColumn, 436);
+    text("Reference number:", 1525, 436);
     
     // Second column
-    int xSecondColumn = 258;
     textAlign(LEFT);
 
     textFont(brandonGrotesqueReg16);
-    text(author, xSecondScreen + xSecondColumn, 356);
+    text(author, 1551, 356);
     
     textFont(brandonGrotesqueReg16);
-    text(editor, xSecondScreen + xSecondColumn, 376);
+    text(editor, 1551, 376);
     
     textFont(brandonGrotesqueReg16);
-    text(language, xSecondScreen + xSecondColumn, 396);
+    text(language, 1551, 396);
     
     textFont(brandonGrotesqueReg16);
-    text(date, xSecondScreen + xSecondColumn, 416);
+    text(date, 1551, 416);
     
     textFont(brandonGrotesqueReg16);
-    text(referenceNumber, xSecondScreen + xSecondColumn, 436);
+    text(referenceNumber, 1551, 436);
     
     // Images
     showBookImages();

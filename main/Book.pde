@@ -23,6 +23,8 @@ class Book{
   String locationInLibrary;
   int date;
   JSONObject dimensions = new JSONObject();
+  color colorOfBook;
+  String strColorOfBook;
   int numberOfPages;
   String referenceNumber;
   String description;
@@ -67,6 +69,7 @@ class Book{
       String tempLocationInLibrary,
       int tempDate,
       JSONObject tempDimensions,
+      String tempColorOfBook,
       int tempNumberOfPages,
       String tempReferenceNumber,
       String tempDescription,
@@ -80,12 +83,16 @@ class Book{
           locationInLibrary = tempLocationInLibrary;
           date = tempDate;
           dimensions = tempDimensions;
+          strColorOfBook = tempColorOfBook;
           numberOfPages = tempNumberOfPages;
           referenceNumber = tempReferenceNumber;
           description = tempDescription;
           images = tempImages;
       
       //coverGraphics = createGraphics();
+      colorOfBook = Integer.parseInt(strColorOfBook, 16);
+      colorOfBook = color(red(colorOfBook), green(colorOfBook), blue(colorOfBook));
+      
       if(images.getString("cover").length() != 0){
         coverImg = loadImage("images/" + images.getString("cover"));
         backImg = loadImage("images/" + images.getString("backcover"));
@@ -218,7 +225,7 @@ class Book{
   }
   
   void displayBook(){
-    noFill();
+    fill(colorOfBook);
     strokeWeight(1);
     stroke(cBlack);
         
@@ -280,8 +287,6 @@ class Book{
     if(currentIndexImages > 11){
       currentIndexImages = 0;
     }
-    
-    println(currentIndexImages);
     
     switch(currentIndexImages){
       case 0:
